@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">zTwitterClient</string>
+
+    <!--Login strings-->
+    <string name="login_with_twitter">Login with twitter</string>
+    <string name="login_failed_msg">Something went wrong. please try again later</string>
+
+    <string name="error_msg">Sorry and error has occurred, please try again later.</string>
+
 </resources>
