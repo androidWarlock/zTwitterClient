@@ -123,8 +123,14 @@ public class UserProfileActivity extends TwitterClientActivity {
 
 
                     }else{
-                        Toast.makeText(UserProfileActivity.this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
-                        mProgressBar.setVisibility(View.GONE);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(UserProfileActivity.this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
+                                mProgressBar.setVisibility(View.GONE);
+                            }
+                        });
+
 
                     }
                 }

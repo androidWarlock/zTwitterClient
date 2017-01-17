@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * Created by Bassem Samy on 10/21/2016.
+ * Created by zMabrook on 16/1/2017.
  */
 
 public class GetFollowersResponse extends Entity implements Parcelable {
@@ -27,6 +27,8 @@ public class GetFollowersResponse extends Entity implements Parcelable {
     }
 
     public GetFollowersResponse() {
+        followers = new ArrayList<>();
+
     }
 
     public ArrayList<Follower> getFollowers() {

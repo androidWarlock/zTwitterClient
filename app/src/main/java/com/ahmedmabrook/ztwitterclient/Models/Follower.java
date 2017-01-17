@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 
 /**
- * Created by Bassem Samy on 10/21/2016.
+ * Created by zMabrook on 16/1/2017.
  */
 
 public class Follower extends Entity implements Parcelable {

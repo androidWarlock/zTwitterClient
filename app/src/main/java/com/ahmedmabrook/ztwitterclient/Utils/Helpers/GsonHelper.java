@@ -7,7 +7,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 
 
 /**
- * Created by Bassem Samy on 10/21/2016.
+ * Created by zMabrook on 16/1/2017.
  */
 
 public class GsonHelper {

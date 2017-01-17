@@ -39,20 +39,6 @@
         android:layout_margin="15dp"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/trloadingBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="Loading..."
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:visibility="gone" />
-
 
     <TextView
         android:id="@+id/noconnection"
@@ -67,4 +53,20 @@
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:visibility="gone" />
+
+
+    <TextView
+        android:id="@+id/trloadingBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Loading..."
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
 </RelativeLayout>
