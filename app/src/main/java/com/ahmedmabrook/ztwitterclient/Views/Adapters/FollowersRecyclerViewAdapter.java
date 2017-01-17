@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ahmedmabrook.ztwitterclient.Models.Abstract.Entity;
 import com.ahmedmabrook.ztwitterclient.Models.Follower;
 import com.ahmedmabrook.ztwitterclient.R;
 import com.ahmedmabrook.ztwitterclient.Views.Activities.UserProfileActivity;
@@ -131,6 +132,14 @@ public class FollowersRecyclerViewAdapter  extends RecyclerView.Adapter<Follower
         }
 
 
+    }
+
+
+    public void add(ArrayList<? extends Entity> result) {
+        for (int i = 0; i < result.size() - 1; i++) {
+            mFollowers.add(((ArrayList<Follower>) result).get(i));
+        }
+        notifyDataSetChanged();
     }
 
 }

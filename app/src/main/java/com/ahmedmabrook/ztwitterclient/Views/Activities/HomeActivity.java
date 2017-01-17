@@ -51,18 +51,16 @@ public class HomeActivity extends TwitterClientActivity {
     ArrayList<Follower> mFollowers;
     FollowersRecyclerViewAdapter mAdapter;
     final static int PAGESIZE = 30;
-    int visibleItemCount;
-    int totalItemCount;
-    int pastVisiblesItems;
     String cursor = "-1";
-    public boolean infiniteScrollingLoading = false;
-
+    private int mFirstVisibleItem, mVisibleItemCount, mTotalItemCount, mLastFirstVisibleItem;
+    public boolean isLoading = false;
+    private static boolean gotToEnd = false;
+     GetFollowersResponse response;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        showLoadingBar();
 
         linearLayoutManager = new LinearLayoutManager(this);
 
@@ -71,17 +69,134 @@ public class HomeActivity extends TwitterClientActivity {
 
         followerSwipeRefreshLayout.setOnRefreshListener(swipRefreshListener);
 
-        if (Network.isConnectedToInternet(this)) {
+        startLoadingFollowers();
 
-            startLoadingData();
+
+    }
+
+
+    private void startLoadingFollowers() {
+        showLoadingBar();
+
+        if (Network.isConnectedToInternet(this)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    final retrofit2.Response<JsonElement> res = TwitterClientHelper.GetFollowers(TwitterClientHelper.GetCurrentUserId(), PAGESIZE, cursor);
+                    if (res.isSuccessful()) {
+                        response = GsonHelper.parseUserFollowersResponse(res.body());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                //TODO: add data to local db.
+
+                                mAdapter = new FollowersRecyclerViewAdapter(HomeActivity.this, response.getFollowers());
+                                recyclerView.setAdapter(mAdapter);
+                                recyclerView.setHasFixedSize(true);
+                                hideLoadingBar();
+
+                                recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                                    @Override
+                                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                                        super.onScrolled(recyclerView, dx, dy);
+                                        mVisibleItemCount = recyclerView.getChildCount();
+                                        mTotalItemCount = linearLayoutManager.getItemCount();
+                                        mFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                                        //checking if no more results to get
+                                        if (gotToEnd) {
+                                            return;
+                                        }
+
+                                        int lastInScreen = mFirstVisibleItem + mVisibleItemCount;
+
+                                        //check if got to last item and not loading and the item count is bigger than default:20
+                                        if ((lastInScreen == mTotalItemCount) && !(isLoading) && (mTotalItemCount >= 30) && !gotToEnd) {
+                                            cursor = response.getNext_cursor();
+                                            loadMoreFollowers();
+
+                                        }
+
+                                    }
+                                });
+
+
+                            }
+                        });
+                    } else {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(HomeActivity.this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
+                                hideLoadingBar();
+
+                            }
+                        });
+                    }
+
+
+                }
+            }).start();
 
         } else {
             //TODO:Load data offline
 
             toastAndShowNoConnectionText();
+            hideLoadingBar();
+
+        }
+
+
+    }
+
+    private void loadMoreFollowers() {
+
+        if (Network.isConnectedToInternet(this)) {
+            isLoading = true;
+            showLoadingBar();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    final retrofit2.Response<JsonElement> res = TwitterClientHelper.GetFollowers(TwitterClientHelper.GetCurrentUserId(), PAGESIZE, cursor);
+                    if (res.isSuccessful()) {
+                        response = GsonHelper.parseUserFollowersResponse(res.body());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //TODO: add data to local db.
+
+                                mAdapter.add(response.getFollowers());
+                                hideLoadingBar();
+                                isLoading = false;
+
+                            }
+                        });
+                    } else {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(HomeActivity.this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
+                                hideLoadingBar();
+                                isLoading = false;
+
+                            }
+                        });
+                    }
+                }
+            }).start();
+        }else {
+            //TODO:Load data offline
+
+            toastAndShowNoConnectionText();
+            isLoading = false;
 
 
         }
+
     }
 
     private SwipeRefreshLayout.OnRefreshListener swipRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
@@ -91,7 +206,7 @@ public class HomeActivity extends TwitterClientActivity {
 
             if (Network.isConnectedToInternet(HomeActivity.this)) {
 
-                startLoadingData();
+                startLoadingFollowers();
 
             } else {
                 //TODO:Load data offline
@@ -102,41 +217,6 @@ public class HomeActivity extends TwitterClientActivity {
             }
         }
     };
-
-    private void startLoadingData() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final retrofit2.Response<JsonElement> res = TwitterClientHelper.GetFollowers(TwitterClientHelper.GetCurrentUserId(), PAGESIZE, cursor);
-                if (res.isSuccessful()) {
-                    final GetFollowersResponse response = GsonHelper.parseUserFollowersResponse(res.body());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mAdapter = new FollowersRecyclerViewAdapter(HomeActivity.this, response.getFollowers());
-                            recyclerView.setAdapter(mAdapter);
-                            recyclerView.setHasFixedSize(true);
-                            hideLoadingBar();
-
-                        }
-                    });
-                } else {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(HomeActivity.this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
-                            hideLoadingBar();
-
-                        }
-                    });
-                }
-
-
-            }
-        }).start();
-
-    }
 
     private void toastAndShowNoConnectionText() {
         Toast.makeText(HomeActivity.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
