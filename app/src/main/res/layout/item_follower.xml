@@ -1,57 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/homeItem"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/homeItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginTop="2dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:layout_marginBottom="4dp">
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="2dp"
+    card_view:cardPreventCornerOverlap="false">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/avatarImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:src="@mipmap/avatar_template"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="2dp" />
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/avatarImageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/avatar_template"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/tw__composer_deep_gray" />
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/followerNameTextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="16dp">
-                <TextView
-                    android:id="@+id/followerNameTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ahmed Mabrook"
-                    android:textSize="18sp"/>
-                <TextView
-                    android:id="@+id/followerHandlerTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="\@zMabrook"
-                    android:textSize="14sp"/>
-                <TextView
-                    android:id="@+id/followerBioTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Cyclist,books worm and software engineer."/>
-            </LinearLayout>
-        </LinearLayout>
+                android:text="Ahmed Mabrook"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/followerHandlerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="\@zMabrook"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/followerBioTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="2dp"/>
+        </LinearLayout>
     </LinearLayout>
 
 

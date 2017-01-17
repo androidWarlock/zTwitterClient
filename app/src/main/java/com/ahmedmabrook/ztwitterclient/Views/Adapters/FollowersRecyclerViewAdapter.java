@@ -71,7 +71,7 @@ public class FollowersRecyclerViewAdapter  extends RecyclerView.Adapter<Follower
         }
 
         if (follower.getScreenName()!=null){
-            viewHolder.followerHandlerTextView.setText(follower.getScreenName());
+            viewHolder.followerHandlerTextView.setText("@"+follower.getScreenName());
         }
 
         if (follower.getBio()!=null){

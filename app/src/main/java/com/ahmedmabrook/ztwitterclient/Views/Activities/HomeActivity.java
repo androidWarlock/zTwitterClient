@@ -44,6 +44,9 @@ public class HomeActivity extends TwitterClientActivity {
     @BindView(R.id.trloadingBar)
     TextView loadingBar;
 
+    @BindView(R.id.noconnection)
+    TextView noconnection;
+
     LinearLayoutManager linearLayoutManager;
     ArrayList<Follower> mFollowers;
     FollowersRecyclerViewAdapter mAdapter;
@@ -82,6 +85,7 @@ public class HomeActivity extends TwitterClientActivity {
                                 recyclerView.setAdapter(mAdapter);
                                 recyclerView.setHasFixedSize(true);
                                 hideLoadingBar();
+
                             }
                         });
                     }else{
@@ -90,6 +94,7 @@ public class HomeActivity extends TwitterClientActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(HomeActivity.this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
+                                hideLoadingBar();
 
                             }
                         });
@@ -97,6 +102,13 @@ public class HomeActivity extends TwitterClientActivity {
                 }
             }).start();
 
+
+        }else {
+            //TODO:Load data offline
+
+            Toast.makeText(HomeActivity.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+            noconnection.setVisibility(View.VISIBLE);
+            hideLoadingBar();
 
         }
     }
@@ -126,6 +138,8 @@ public class HomeActivity extends TwitterClientActivity {
     }
 
 
+ private void StartLoadingData(){
 
+ }
 
 }
