@@ -25,7 +25,8 @@
             android:value="6b09fd35143e5497bb50aa0403826b447fec6d02" />
 
         <activity android:name=".Views.Activities.HomeActivity" />
-        <activity android:name=".Views.Activities.UserProfileActivity"></activity>
+        <activity android:name=".Views.Activities.UserProfileActivity"
+            android:theme="@style/AppTheme.NoActionBarTheme"/>
     </application>
 
 </manifest>

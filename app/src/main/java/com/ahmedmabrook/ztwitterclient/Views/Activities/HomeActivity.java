@@ -121,7 +121,6 @@ public class HomeActivity extends TwitterClientActivity {
                                     }
                                 });
 
-
                             }
                         });
                     } else {

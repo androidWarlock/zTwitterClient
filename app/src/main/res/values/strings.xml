@@ -7,5 +7,6 @@
 
     <string name="error_msg">Error occured. Please try again later.</string>
     <string name="no_internet">No internet. Please check your connection.</string>
+    <string name="no_tweets">Sorry there are no tweets!</string>
 
 </resources>
