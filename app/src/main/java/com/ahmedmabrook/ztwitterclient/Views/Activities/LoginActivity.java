@@ -29,20 +29,17 @@ public class LoginActivity extends TwitterClientActivity {
     private static final String TWITTER_KEY = "xW9JpChXvbCo5ig4uEecHloBr";
     private static final String TWITTER_SECRET = "wAt8gB1spodqzAeyp1lkR1KPVDfntcVokLpGVXhx48JyUifthN";
 
-
+    @BindView(R.id.twitterLoginButton)
     TwitterLoginButton twitterLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
 
         checkUserSession();
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
-
-        twitterLoginButton = (TwitterLoginButton)findViewById(R.id.twitterLoginButton);
         twitterLoginButton.setText(R.string.login_with_twitter);
         twitterLoginButton.setCallback(twitterLoginCallback);
 

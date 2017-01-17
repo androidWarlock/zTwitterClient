@@ -7,9 +7,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:layout_marginBottom="4dp"
-    android:layout_marginRight="2dp"
-    android:layout_marginLeft="2dp">
+    android:layout_marginBottom="4dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -26,7 +25,7 @@
                 android:layout_height="50dp"
                 android:src="@mipmap/avatar_template"
                 app:civ_border_width="2dp"
-                app:civ_border_color="@color/tw__solid_white" />
+                app:civ_border_color="@color/tw__composer_deep_gray" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

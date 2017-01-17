@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends TwitterClientActivity {
+
     @BindView(R.id.followersRecyclerView)
     EmptyRecyclerView recyclerView;
 
@@ -67,20 +68,35 @@ public class HomeActivity extends TwitterClientActivity {
 
 
         if (Network.isConnectedToInternet(this)) {
-            final retrofit2.Response<JsonElement> res = TwitterClientHelper.GetFollowers(TwitterClientHelper.GetCurrentUserId(), PAGESIZE, cursor);
-            if (res.isSuccessful()) {
-                final GetFollowersResponse response = GsonHelper.parseUserFollowersResponse(res.body());
 
-                mAdapter = new FollowersRecyclerViewAdapter(HomeActivity.this, response.getFollowers());
-                recyclerView.setAdapter(mAdapter);
-                recyclerView.setHasFixedSize(true);
-                hideLoadingBar();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    final retrofit2.Response<JsonElement> res = TwitterClientHelper.GetFollowers(TwitterClientHelper.GetCurrentUserId(), PAGESIZE, cursor);
+                    if (res.isSuccessful()) {
+                        final GetFollowersResponse response = GsonHelper.parseUserFollowersResponse(res.body());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mAdapter = new FollowersRecyclerViewAdapter(HomeActivity.this, response.getFollowers());
+                                recyclerView.setAdapter(mAdapter);
+                                recyclerView.setHasFixedSize(true);
+                                hideLoadingBar();
+                            }
+                        });
+                    }else{
 
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(HomeActivity.this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
 
+                            }
+                        });
+                    }
+                }
+            }).start();
 
-            }else{
-                Toast.makeText(this, getString(R.string.error_msg), Toast.LENGTH_SHORT).show();
-            }
 
         }
     }
