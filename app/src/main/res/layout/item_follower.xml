@@ -58,6 +58,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/followerBioTextView"
                 android:layout_width="wrap_content"
