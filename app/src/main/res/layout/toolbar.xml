@@ -1,0 +1,29 @@
+<RelativeLayout android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="zTwitter Client"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/tw__solid_white"/>
+
+    <Button
+        android:id="@+id/changeLanguage"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:textSize="10sp"
+        android:padding="5dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/tw__composer_white"
+        android:text="@string/changeLanguage"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

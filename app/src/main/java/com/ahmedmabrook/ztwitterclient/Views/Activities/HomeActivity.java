@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.ahmedmabrook.ztwitterclient.Models.Follower;
 import com.ahmedmabrook.ztwitterclient.Models.GetFollowersResponse;
 import com.ahmedmabrook.ztwitterclient.R;
 import com.ahmedmabrook.ztwitterclient.Utils.Helpers.GsonHelper;
+import com.ahmedmabrook.ztwitterclient.Utils.Language;
 import com.ahmedmabrook.ztwitterclient.Utils.Network;
 import com.ahmedmabrook.ztwitterclient.Utils.Twitter.TwitterClientHelper;
 import com.ahmedmabrook.ztwitterclient.Views.Activities.Abstract.TwitterClientActivity;
@@ -53,6 +55,9 @@ public class HomeActivity extends TwitterClientActivity {
     @BindView(R.id.noconnection)
     TextView noconnection;
 
+    @BindView(R.id.changeLanguage)
+    Button changeLanguageButton;
+
     LinearLayoutManager linearLayoutManager;
     ArrayList<Follower> mFollowers;
     FollowersRecyclerViewAdapter mAdapter;
@@ -68,9 +73,17 @@ public class HomeActivity extends TwitterClientActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Language.loadLanguage(this);
+
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+        changeLanguageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Language.changeLanguage(HomeActivity.this);
+            }
+        });
         dbHelper = new DatabaseHelper(this);
 
         linearLayoutManager = new LinearLayoutManager(this);

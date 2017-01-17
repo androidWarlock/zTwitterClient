@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -15,12 +16,14 @@ import android.widget.Toast;
 import com.ahmedmabrook.ztwitterclient.Models.Follower;
 import com.ahmedmabrook.ztwitterclient.R;
 import com.ahmedmabrook.ztwitterclient.Utils.Helpers.GsonHelper;
+import com.ahmedmabrook.ztwitterclient.Utils.Language;
 import com.ahmedmabrook.ztwitterclient.Utils.Network;
 import com.ahmedmabrook.ztwitterclient.Utils.Twitter.TwitterClientHelper;
 import com.ahmedmabrook.ztwitterclient.Views.Activities.Abstract.TwitterClientActivity;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonElement;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.models.User;
 import com.twitter.sdk.android.tweetui.TweetView;
 
 import butterknife.BindView;
@@ -48,6 +51,9 @@ public class UserProfileActivity extends TwitterClientActivity {
     @BindView(R.id.noconnection)
     TextView noconnection;
 
+    @BindView(R.id.changeLanguage)
+    Button changeLanguageButton;
+
     Follower mFollower;
     Tweet[] tweets;
 
@@ -59,6 +65,12 @@ public class UserProfileActivity extends TwitterClientActivity {
         setContentView(R.layout.activity_user_profile);
         ButterKnife.bind(this);
 
+        changeLanguageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Language.changeLanguage(UserProfileActivity.this);
+            }
+        });
         tweets = new Tweet[0];
 
         mFollower = getIntent().getParcelableExtra(FOLLOWER_EXTRA);

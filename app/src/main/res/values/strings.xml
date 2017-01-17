@@ -9,4 +9,6 @@
     <string name="no_internet">No internet. Please check your connection.</string>
     <string name="no_tweets">Sorry there are no tweets!</string>
 
+    <string name="changeLanguage">عربي</string>
+
 </resources>

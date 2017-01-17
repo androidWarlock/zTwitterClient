@@ -20,10 +20,11 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="12dp"
-        android:paddingRight="5dp"
+        android:paddingRight="12dp"
         android:paddingTop="5dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/avatarImageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -37,11 +38,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/followerNameTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ahmed Mabrook"
                 android:maxLines="1"
@@ -50,7 +52,7 @@
 
             <TextView
                 android:id="@+id/followerHandlerTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:text="\@zMabrook"
@@ -59,7 +61,7 @@
 
             <TextView
                 android:id="@+id/followerBioTextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:layout_marginBottom="2dp"/>

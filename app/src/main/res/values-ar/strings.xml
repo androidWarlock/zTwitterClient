@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="login_failed_msg">عفوا لم نستطع الدخول حاول مرة اخرى</string>
+    <string name="error_msg">عفواً لقد حدث خطأ من فضلك حاول لاحقاً</string>
+    <string name="no_internet">لا يوجد اتصال بالانترنت</string>
+    <string name="no_tweets">عفواً لا يوجد تغريدات</string>
+    <string name="login_with_twitter">الدخول بتويتر</string>
+    <string name="changeLanguage">En</string>
+
+</resources>
