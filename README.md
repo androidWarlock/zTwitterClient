@@ -14,6 +14,4 @@ using the following:
 Min SDK: Android V 4.0 (ICE CREAM SANDWICH)
 
 
-applying minimal MVC design pattern and was going to add a Domain-Driven module but didn't find alot of business logic to do.
-
-Tried to break every component to smaller componets for better isolation and for easy maintainability and extendability in the futuer.
+applying the MVC design pattern and whenever i saw it possible i divided every component to smaller componets for better isolation and for easy maintainability and extendability in the futuer.
